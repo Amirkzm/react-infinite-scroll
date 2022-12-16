@@ -16,16 +16,20 @@ react-infinite-scroll is a package that provides smooth scrooling on a long list
 
 ### Problem
 
-Suppose that we have a long list of item to display and server uses pagination to handle that long list of items. We want to load and show all those items in a smooth way
+Suppose that we have a long list of item to display and server uses pagination to handle that long list of items. We want to load and show all those items in a smooth way as user scroll the page.
 
 ### Solution
 
-you can simply use this hook to solve this problem. the only thnig that should be noticed is the callback function that must return an object if a condition has met in order to stop execution of useEffect next time otherwise it has to return false.Also it has to be mentioned that dependency argument doesn't need to be an array. it can be an object,a number or anything else.
+react-infinite-scroll helps us to fetch and show new data as user scroll down.<br>
+![](https://github.com/Your_Repository_Name/Your_GIF_Name.gif)
 
 ### Installation
 
-This module is distributed via npm which is bundled with node and should be installed as one of your project's dependencies:<br>
-<code>npm install --save @amir253700/use-conditional-effect</code>
+Simply use:<br>
+
+<code>npm install @amirkzm/react-infinite-scroll</code>
+Or by yarn:<br>
+<code>yarn add @amirkzm/react-infinite-scroll</code>
 
 ### Usage
 
