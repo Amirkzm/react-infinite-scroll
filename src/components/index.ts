@@ -1,1 +1,1 @@
-export { default as InfiniteLoader } from "./InfiniteLoader";
+export { default as InfiniteScroll } from "./InfiniteScroll";
