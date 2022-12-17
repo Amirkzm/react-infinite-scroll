@@ -25,7 +25,7 @@ interface ItemProps {
   style: any;
 }
 
-const InfiniteLoader = ({
+const InfiniteScroll = ({
   renderFunction,
   dataExtractor = (response) => {
     return response;
@@ -120,4 +120,4 @@ const InfiniteLoader = ({
   );
 };
 
-export default InfiniteLoader;
+export default InfiniteScroll;
