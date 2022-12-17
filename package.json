@@ -1,10 +1,10 @@
 {
   "name": "@amirkzm/react-infinite-scroll",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Amir Kazemi",
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/amir253700"
+    "registry": "https://npm.pkg.github.com/amirkzm"
   },
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs"
@@ -34,7 +34,7 @@
     "react": "^18.0.0 || ^17.0.0"
   },
   "dependencies": {
-    "@amir253700/use-conditional-effect": "^1.0.8",
+    "@amirkzm/use-conditional-effect": "^1.0.0",
     "react-window": "^1.8.8"
   },
   "main": "dist/cjs/index.js",

@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@amir253700/use-conditional-effect@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@amir253700/use-conditional-effect/-/use-conditional-effect-1.0.8.tgz#f958f4e1edb21672085ae164e29309836d73e7d8"
-  integrity sha512-kv8nwa/jO2EHtv8V10rM5cDH73peFvfJM5XLe9XjWlaDxUFHvhWnndp2YIC9+KYbv1a+gHaDd2f8J6j1lq3CSA==
+"@amirkzm/use-conditional-effect@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@amirkzm/use-conditional-effect/-/use-conditional-effect-1.0.0.tgz#215a350a1e4f7832654037cd0962f0fc524058ac"
+  integrity sha512-9r307og0FdhcQhMb1HP1dmPrKri9k5uyAgqhwZ3DKUyrwV+v21oRsbkqO7IAEeJdnmpVXFNhc+eImnse3719Hw==
 
 "@babel/code-frame@^7.18.6":
   version "7.18.6"

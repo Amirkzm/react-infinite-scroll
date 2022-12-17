@@ -1,4 +1,4 @@
-import { useConditionalEffect } from "@amir253700/use-conditional-effect";
+import { useConditionalEffect } from "@amirkzm/use-conditional-effect";
 import React, { ComponentType, useRef, useState } from "react";
 import {
   FixedSizeList as List,
