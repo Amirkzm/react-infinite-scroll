@@ -26,6 +26,7 @@
     "react": "^18.0.0 || ^17.0.0"
   },
   "dependencies": {
+    "@amir253700/use-conditional-effect": "^1.0.8",
     "react-window": "^1.8.8"
   },
   "main": "dist/cjs/index.js",
