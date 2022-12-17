@@ -91,7 +91,7 @@ const listItem = ({ data, index, style }: ItemProps): JSX.Element => {
 ### Props
 
 | Props            | Types                                              | Description                                                                                                                                                                          |
-| ---------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- | --- | --- | --- |
+| ---------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | renderFunction   | (data:any, index:number, style:any) => JSX.Element | React component responsible for rendering the individual item specified by an index prop. This component also receives style props(used for positioning) and a data prop.            |
 | addressGenerator | (pageNumber:number) => string                      | A function that recieves page number and generate the address of that page number to fetch data from.                                                                                |
 | dataExtractor    | (response:any) => any[]                            | An optional function that convert the desired result from server to an array. if server response is an array by itself leave we don't need to pass this function.                    |
@@ -99,7 +99,7 @@ const listItem = ({ data, index, style }: ItemProps): JSX.Element => {
 | errorElement     | ReactNode                                          | An Optional ReactNode element if we want to show user as error                                                                                                                       |
 | itemCount        | number or (response:any) => number                 | Total number of items we want to render. It can be a number or a function that recieve the response of the server and return the total number of elements in case server returns it. |
 | width            | number                                             | Specify the width of the list. It can be a number or string                                                                                                                          |
-| itemSize         | number                                             | Size of a item in the direction being windowed. For vertical lists, this is the row height. For horizontal lists, this is the column width.                                          |     |     |     |     |
+| itemSize         | number                                             | Size of a item in the direction being windowed. For vertical lists, this is the row height. For horizontal lists, this is the column width.                                          |
 
 You can also pass all the props of the react-window package props on their [documents](https://react-window.vercel.app/#/api/FixedSizeList).<br>
 
