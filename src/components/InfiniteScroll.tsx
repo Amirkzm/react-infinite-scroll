@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import { useConditionalEffect } from "@amir253700/use-conditional-effect";
+import React, { ComponentType, useRef, useState } from "react";
 import {
   FixedSizeList as List,
   FixedSizeListProps,
+  ListChildComponentProps,
   ListOnScrollProps,
 } from "react-window";
 
@@ -10,9 +12,11 @@ import useLazyFetch from "../hooks/useLazyFetch";
 interface InfiniteScrollProps
   extends Omit<FixedSizeListProps, "itemCount" | "children" | "onScroll"> {
   renderFunction?: ({ data, index, style }: ItemProps) => JSX.Element;
+  dataExtractor?: (response: any) => any[];
   addressGenerator: (pageNumber: number) => string;
   loadingElement?: React.ReactNode;
   errorElement?: React.ReactNode;
+  itemCount: number | ((response: any) => number);
 }
 
 interface ItemProps {
@@ -21,35 +25,58 @@ interface ItemProps {
   style: any;
 }
 
-const listItem = ({ data, index, style }: ItemProps): JSX.Element => {
-  return (
-    <div style={style}>
-      {data[index].id} {data[index].name} {index}
-    </div>
-  );
-};
-
-const InfiniteScroll = ({
+const InfiniteLoader = ({
   renderFunction,
+  dataExtractor = (response) => {
+    return response;
+  },
   addressGenerator,
   loadingElement = <p>Loading...</p>,
   errorElement = <p>Something went wrong!</p>,
+  itemCount,
   ...rest
 }: InfiniteScrollProps): JSX.Element => {
+  const [data, setData] = useState<any[]>([]);
   const pageNumber = useRef<number>(1);
   const isLocked = useRef<boolean>(false);
   const lastScrollOffset = useRef<number>(0);
   const listRef = useRef<any>(null);
+  const totalItemsToDisplay =
+    useRef<InfiniteScrollProps["itemCount"]>(itemCount);
 
   const [fetchData, { isLoading, result, isError }] = useLazyFetch(
     addressGenerator(1)
   );
 
+  useConditionalEffect(() => {
+    if (result) {
+      console.log("inside uesConditional");
+      setData(dataExtractor(result));
+      if (typeof itemCount !== "number") {
+        totalItemsToDisplay.current = itemCount(result);
+      } else {
+        totalItemsToDisplay.current = itemCount;
+      }
+      return { finished: true, cleanup: () => {} };
+    }
+    return false;
+  }, [result, itemCount]);
+
   const loadMoreData = async () => {
     if (!isLoading && !isLocked.current) {
       isLocked.current = true;
-      pageNumber.current++;
-      await fetchData(addressGenerator(pageNumber.current));
+      if (data.length <= itemCount) {
+        pageNumber.current++;
+        console.log(pageNumber.current);
+        console.log(addressGenerator(pageNumber.current));
+        const newData = await fetchData(addressGenerator(pageNumber.current));
+        if (typeof itemCount !== "number") {
+          totalItemsToDisplay.current = itemCount(newData);
+        }
+        const newDataArray = dataExtractor(newData);
+        console.log(newData);
+        setData((prev) => [...prev, ...newDataArray]);
+      }
       isLocked.current = false;
     }
   };
@@ -73,18 +100,19 @@ const InfiniteScroll = ({
       }
     }
   };
+  console.log(data);
 
   return (
     <>
       <List
-        itemCount={result.length}
-        itemData={result}
+        itemCount={data.length}
+        itemData={data}
         outerRef={listRef}
         onScroll={scrollHandler}
         initialScrollOffset={lastScrollOffset.current}
         {...rest}
       >
-        {listItem}
+        {renderFunction as ComponentType<ListChildComponentProps<any>>}
       </List>
       {isLoading && loadingElement}
       {isError && loadingElement}
@@ -92,4 +120,4 @@ const InfiniteScroll = ({
   );
 };
 
-export default InfiniteScroll;
+export default InfiniteLoader;
