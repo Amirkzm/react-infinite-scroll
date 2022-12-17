@@ -10,7 +10,7 @@ import {
 import useLazyFetch from "../hooks/useLazyFetch";
 
 interface InfiniteScrollProps
-  extends Omit<FixedSizeListProps, "itemCount" | "children" | "onScroll"> {
+  extends Omit<FixedSizeListProps, "itemCount" | "children"> {
   renderFunction?: ({ data, index, style }: ItemProps) => JSX.Element;
   dataExtractor?: (response: any) => any[];
   addressGenerator: (pageNumber: number) => string;
@@ -34,6 +34,7 @@ const InfiniteScroll = ({
   loadingElement = <p>Loading...</p>,
   errorElement = <p>Something went wrong!</p>,
   itemCount,
+  onScroll,
   ...rest
 }: InfiniteScrollProps): JSX.Element => {
   const [data, setData] = useState<any[]>([]);
@@ -81,7 +82,9 @@ const InfiniteScroll = ({
     }
   };
 
-  const scrollHandler = ({ scrollOffset }: ListOnScrollProps): any => {
+  const scrollHandler = (onScrollProps: ListOnScrollProps): any => {
+    const { scrollOffset } = onScrollProps;
+    onScroll?.(onScrollProps);
     const direction = rest.direction;
     const listElement = listRef.current;
     if (listElement) {
