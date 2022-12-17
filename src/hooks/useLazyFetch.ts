@@ -10,7 +10,7 @@ type LazyFetchResult = [
 ];
 
 const useLazyFetch = (initUrl: string): LazyFetchResult => {
-  const [result, setResult] = useState<any[]>([]);
+  const [result, setResult] = useState<any | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -23,9 +23,7 @@ const useLazyFetch = (initUrl: string): LazyFetchResult => {
         throw new Error("Request Failed");
       }
       const jsonResponse = await response.json();
-      setResult((prev) => {
-        return [...prev, ...jsonResponse];
-      });
+      setResult(jsonResponse);
       setIsLoading(false);
       return jsonResponse;
     } catch (error: any) {
